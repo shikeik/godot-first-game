@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0vq5sen4xbul"]
+
+[ext_resource type="Texture2D" uid="uid://o1c4v5i46884" path="res://assets/sprites/ui_arrow.png" id="1_xkbyl"]
+
+[node name="MapButton" type="Node2D"]
+scale = Vector2(3, 3)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(-16.4, -16.8)
+texture_normal = ExtResource("1_xkbyl")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=4 uid="uid://b36rbughl5xyv"]
+[gd_scene load_steps=20 format=4 uid="uid://b36rbughl5xyv"]
 
 [ext_resource type="TileSet" uid="uid://q8v8gulxv8lk" path="res://tilesets/map.tres" id="1_iywne"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://b55a3vpy28bpv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bgga15i5o1tjj" path="res://scenes/mushroom.tscn" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://ddbx44b00nf87" path="res://scenes/platform.tscn" id="3_lnu2h"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bdwdpgpbudmwe" path="res://scenes/slime.tscn" id="6_p57ef"]
 [ext_resource type="FontFile" uid="uid://b1p6dmvyx8w5u" path="res://assets/fonts/PixelOperator8.ttf" id="7_u5sy4"]
 [ext_resource type="FontFile" uid="uid://ref63w5tx0jw" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="8_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://c0vq5sen4xbul" path="res://scenes/mapping_button.tscn" id="10_vtaks"]
 
 [sub_resource type="Animation" id="Animation_lbhrr"]
 length = 0.001
@@ -50,7 +52,65 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 
+[sub_resource type="Animation" id="Animation_kvpfn"]
+resource_name = "open_canvas"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dinhu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kvuet"]
+resource_name = "close_canvas"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvuet"]
+_data = {
+&"RESET": SubResource("Animation_dinhu"),
+&"close_canvas": SubResource("Animation_kvuet"),
+&"open_canvas": SubResource("Animation_kvpfn")
+}
+
 [node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_kvpfn")
 
 [node name="Tilemap" type="Node" parent="."]
 
@@ -197,3 +257,54 @@ theme_override_colors/font_color = Color(0.556863, 0.662745, 1, 1)
 theme_override_fonts/font = ExtResource("8_0tnpc")
 theme_override_font_sizes/font_size = 8
 text = "best high!"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Left" parent="UI" instance=ExtResource("10_vtaks")]
+position = Vector2(105, 561)
+rotation = -1.5708
+
+[node name="TouchScreenButton" parent="UI/Left" index="0"]
+action = "move_left"
+
+[node name="Right" parent="UI" instance=ExtResource("10_vtaks")]
+position = Vector2(261, 565)
+rotation = 1.5708
+
+[node name="TouchScreenButton" parent="UI/Right" index="0"]
+action = "move_right"
+
+[node name="Jump" parent="UI" instance=ExtResource("10_vtaks")]
+position = Vector2(977, 560)
+
+[node name="TouchScreenButton" parent="UI/Jump" index="0"]
+action = "jump"
+
+[node name="DarkCanvas" type="ColorRect" parent="UI"]
+modulate = Color(0, 0, 0, 0)
+offset_left = -389.0
+offset_top = -459.0
+offset_right = 1611.0
+offset_bottom = 1041.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/DarkCanvas"]
+libraries = {
+&"": SubResource("AnimationLibrary_kvuet")
+}
+autoplay = "open_canvas"
+
+[node name="CoinLabel" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_left = 40.0
+offset_top = 26.0
+offset_right = 208.0
+offset_bottom = 49.0
+scale = Vector2(0.65, 0.65)
+theme_override_fonts/font = ExtResource("8_0tnpc")
+theme_override_font_sizes/font_size = 32
+text = "Your coin: 0"
+
+[editable path="UI/Left"]
+[editable path="UI/Right"]
+[editable path="UI/Jump"]
