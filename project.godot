@@ -13,8 +13,12 @@ config_version=5
 config/name="GodotFirstGame"
 run/main_scene="uid://b36rbughl5xyv"
 config/features=PackedStringArray("4.4", "Mobile")
-boot_splash/show_image=false
 config/icon="res://icon.svg"
+boot_splash/show_image=false
+
+[autoload]
+
+Music="*res://scenes/music.tscn"
 
 [display]
 
@@ -77,4 +81,5 @@ pointing/emulate_touch_from_mouse=true
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true

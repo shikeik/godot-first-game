@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=4 uid="uid://b36rbughl5xyv"]
 
 [ext_resource type="TileSet" uid="uid://q8v8gulxv8lk" path="res://tilesets/map.tres" id="1_iywne"]
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kvpfn"]
+[ext_resource type="Script" uid="uid://xp7u2bsokv8a" path="res://scripts/game_manager.gd" id="1_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://b55a3vpy28bpv" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bgga15i5o1tjj" path="res://scenes/mushroom.tscn" id="3_gee14"]
 [ext_resource type="PackedScene" uid="uid://ddbx44b00nf87" path="res://scenes/platform.tscn" id="3_lnu2h"]
@@ -52,22 +52,6 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 
-[sub_resource type="Animation" id="Animation_kvpfn"]
-resource_name = "open_canvas"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_dinhu"]
 length = 0.001
 tracks/0/type = "value"
@@ -97,6 +81,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kvpfn"]
+resource_name = "open_canvas"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kvuet"]
