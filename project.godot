@@ -13,8 +13,8 @@ config_version=5
 config/name="GodotFirstGame"
 run/main_scene="uid://b36rbughl5xyv"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
 boot_splash/show_image=false
+config/icon="res://icon.svg"
 
 [autoload]
 
